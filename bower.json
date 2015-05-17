@@ -1,0 +1,21 @@
+{
+  "name": "thattachu",
+  "version": "1.0.0",
+  "homepage": "https://github.com/tecoholic/thattachu",
+  "authors": [
+    "tecoholic <arun@arunmozhi.in>"
+  ],
+  "description": "A typing tutor.",
+  "main": "./bin/www",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angularjs": "~1.3.15"
+  }
+}
