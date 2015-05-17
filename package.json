@@ -1,0 +1,23 @@
+{
+  "name": "thattachu",
+  "version": "1.0.0",
+  "description": "A typing tutor.",
+  "main": "src/backend/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tecoholic/thattachu.git"
+  },
+  "keywords": [
+    "typing",
+    "tamil"
+  ],
+  "author": "Arunmozhi (tecoholic)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tecoholic/thattachu/issues"
+  },
+  "homepage": "https://github.com/tecoholic/thattachu"
+}
