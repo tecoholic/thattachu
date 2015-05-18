@@ -16,6 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "~3.3.4"
+    "bootstrap": "~3.3.4",
+    "jquery.ime": "https://github.com/wikimedia/jquery.ime.git#~1.0.0+20131229"
   }
 }

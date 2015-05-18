@@ -1,6 +1,21 @@
 #workspace
-  h2 Workspace
-  p
-    | This is a module which should be able to act as a typing window.
-    | A line of non editable line which acts as the guide and a line of
-    | editable line whicj acts as the practice line.
+  div(class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main")
+    div(class="subhead title col-sm-12") Instructions
+    div.col-sm-12
+        p
+          This space will be used for loading the instructions for that particular lesson
+  div(class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main")
+    div(class="subhead title col-sm-12") Workspace
+    div.col-sm-12
+      p
+        | This is a module which should be able to act as a typing window.
+        br
+        | A line of non editable line which acts as the guide and a line of
+        br
+        | editable line which acts as the practice line.
+#statusbar(class="subhead col-sm-12 col-md-12")
+    p
+      span.statitem
+        | Errors: 0
+      span.statitem
+        | Accuracy: 100%
