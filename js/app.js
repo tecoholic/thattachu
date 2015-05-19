@@ -25,7 +25,7 @@ tch.loadLesson = function(lname){
             var lines = l[i].lines;
             $('#workbench').empty();
             for( var i=0; i<lines.length; i++){
-                $('#workbench').append('<p class="line">'+lines[i]+'</p><textarea rows=1 cols=80 class="typespace"></textarea>');
+                $('#workbench').append('<p class="line">'+lines[i]+'</p><input type="text" class="typespace" />');
             }
             return;
         }
@@ -42,7 +42,6 @@ $('#lang').on('change', function(){
         });
     }
 });
-
 
 // Load the course into the tutor upon course selection
 $('#courseSelect').on('change', function(){
@@ -61,5 +60,3 @@ $('#courseSelect').on('change', function(){
         tch.loadLesson(course.lessons[0].name);
     });
 });
-
-

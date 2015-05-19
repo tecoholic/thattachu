@@ -35,7 +35,7 @@ casper.test.begin('Thattachu Entry modal loading', 14, function suite(test){
                 "The first lesson instruction is loaded.");
             // there should be as many lines and typespaces as in the json
             test.assertElementCount('p.line', 6);
-            test.assertElementCount('textarea.typespace', 6);
+            test.assertElementCount('input.typespace', 6);
         });
     });
 
@@ -44,9 +44,9 @@ casper.test.begin('Thattachu Entry modal loading', 14, function suite(test){
         this.clickLabel("Middle DK", "a");
         test.assertEquals(casper.getHTML('#instructions'),
             "This is the second lesson of the QWERTY. Keep the left index finger on <kbd>d</kbd> and yout right index finger on <kbd>k</kbd>.",
-            "Instructions change on click");
-        test.assertElementCount('p.line', 7, "Update the key lines");
-        test.assertElementCount('textarea.typespace', 7, "Update the type spaces");
+            "Update the instructions as per lesson 2");
+        test.assertElementCount('p.line', 7, "Update the key lines as per lesson 2");
+        test.assertElementCount('input.typespace', 7, "Update the type spaces as per lesson 2");
     });
 
     casper.run(function(){

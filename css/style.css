@@ -68,15 +68,25 @@ body {
     bottom: 0px;
     position: fixed;
 }
-
-/* Lastly, apply responsive CSS fixes as necessary */
-@media (max-width: 767px) {
-  #footer {
-    margin-left: -20px;
-    margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+#workbench{
+    padding-bottom: 50px;
 }
-
-
+#instructions{
+    padding-top: 15px;
+    font-size: 1.2em;
+}
+p.line{
+    padding-top: 10px;
+    font-size: 1.5em;
+    font-family: Monospace;
+}
+input.typespace{
+    width: 100%;
+    border: 0;
+    background-color: #adeade;
+    line-height: 1.5em;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 1.5em;
+    font-family: Monospace;
+}
