@@ -1,0 +1,22 @@
+{
+    "id" : 0,
+    "name": "Demo Course",
+    "author": "Demo Author",
+    "level": 0,
+    "description" : "Beginner level QWERTY touch typing course",
+    "language": "English",
+    "lessons": [
+    {
+        "index" : 0,
+        "name" : "Index FJ",
+        "lines" : ["ffff", "jjjj", "ff ff ff", "jj jj jj", "f f f f", "j j j j"],
+        "instructions": "Welcome to the first lesson in QWERTY Touch Typing. Keep your left index finger on <kbd>f</kbd> and your right index finger on <kbd>j</kbd>."
+    },
+    {
+        "index": 1,
+        "name" : "Middle DK",
+        "lines": ["dddd", "kkkk", "dd dd dd", "kk kk kk", "d d d d", "k k k k"],
+        "instructions": "This is the second lesson of the QWERTY. Keep the left index finger on <kbd>d</kbd> and yout right index finger on <kbd>k</kbd>."
+    }
+        ]
+}

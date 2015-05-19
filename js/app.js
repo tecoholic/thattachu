@@ -10,23 +10,26 @@ $(document).ready(function(){
     });
 
     // populate the courses upon language selection
-    $('#lang').change(function(){
+    $('#lang').on('change', function(){
         if($("#lang").val() !== 'none'){
             $.getJSON("/data/"+$('#lang').val()+"/courselist.json", function(d){
                 for(var i=0; i<d.length; i++){
-                    $('#course').append("<option value='"+d[i].filename+"'>"+d[i].name+"</option>");
+                    $('#courseSelect').append("<option value='"+d[i].file+"'>"+d[i].name+"</option>");
                 }
             });
         }
     });
 
     // Load the course into the tutor upon course selection
-    $('#course').change(function(){
-        if($('#course').val()){
-            $.getJSON("/data/"+$("#lang").val()+"/"+$('#course').val(),function(){
-             //TODO load the lessons into the workspace
-            });
-        }
+    $('#courseSelect').on('change', function(){
+        $('#myModal').modal('hide');
+        $.getJSON("/data/"+$("#lang").val()+"/"+$('#courseSelect').val(),function(course){
+            // Load the lessons list to the sidebar
+            $('#sidebarList').empty();
+            for(var i=0; i < course.lessons.length; i++){
+                $('#sidebarList').append('<li><a href="#">'+course.lessons[i].name+'</a></li>');
+            }
+        });
     });
 
 });
