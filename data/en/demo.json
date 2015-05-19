@@ -15,7 +15,7 @@
     {
         "index": 1,
         "name" : "Middle DK",
-        "lines": ["dddd", "kkkk", "dd dd dd", "kk kk kk", "d d d d", "k k k k"],
+        "lines": ["dddd", "kkkk", "dd dd dd", "kk kk kk", "d d d d", "k k k k", "dk dk dd kk"],
         "instructions": "This is the second lesson of the QWERTY. Keep the left index finger on <kbd>d</kbd> and yout right index finger on <kbd>k</kbd>."
     }
         ]
