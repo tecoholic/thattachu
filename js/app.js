@@ -54,12 +54,18 @@ $('#courseSelect').on('change', function(){
         // Load the lessons list to the sidebar
         $('#sidebarList').empty();
         for(var i=0; i < course.lessons.length; i++){
-            $('#sidebarList').append('<li><a href="#">'+course.lessons[i].name+'</a></li>');
+            $('#sidebarList').append('<li class="list-group-item"><a href="#">'+course.lessons[i].name+'</a></li>');
             // bind the new elements to load the lesson when clicked
             $('#sidebarList a').click(function(){
                 tch.loadLesson($(this).text());
             });
         }
+        // Update the course metadata
+        $('span#coursename').text(course.name);
+        $('span#author').text(course.author);
+        $("span#level").text(course.level);
+        $("span#courselang").text(course.language);
+        $("span#description").text(course.description);
         tch.courseData = course;
         tch.loadLesson(course.lessons[0].name);
     });

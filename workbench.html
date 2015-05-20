@@ -66,7 +66,6 @@
 
             // for any print-affecting character prevent default action
             var keys = [8,9,13,32,35,36,37,39,46,188,190,191,192,219,220,221,222,186,59,187,61,189,173];
-            console.log("pressed "+e.keyCode+" with keys.indexOf "+keys.indexOf(e.keyCode));
             if( keys.indexOf(e.keyCode) != -1 || (e.keyCode >=48 && e.keyCode <= 57) || (e.keyCode >= 65 && e.keyCode <= 90)){
                 e.preventDefault();
 
@@ -93,6 +92,10 @@
             $(this).find('.outcome').val(outcome);
         }
     });
+
+    $("input").change(function(){
+            console.log(" event occured");
+        });
 </script>
 </body>
 </html>
