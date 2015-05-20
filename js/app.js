@@ -14,12 +14,17 @@ $(document).ready(function(){
 
 var tch = {};
 tch.courseData = {};
+tch.totalChars = 0;
+tch.errors = 0;
 
 tch.loadLesson = function(lname){
     if(!tch.courseData.name){
             return;
     }
     var l = tch.courseData.lessons;
+    // reset total chars in the lesson
+    tch.totalChars = 0;
+    tch.errors = 0;
     for(var i=0; i < l.length; i++){
         if(l[i].name === lname){
             $('#instructions').html(l[i].instructions);
@@ -36,6 +41,10 @@ tch.loadLesson = function(lname){
     }
 }
 
+tch.updateAccuracy = function(){
+    $("span#accuracy").text(Math.round((tch.totalChars-tch.errors)*100/tch.totalChars));
+    $("span#errors").text(tch.errors);
+}
 // populate the courses upon language selection
 $('#lang').on('change', function(){
     if($("#lang").val() !== 'none'){
@@ -76,6 +85,8 @@ function evaluateInput(e){
     var outcome = $(this).find('.outcome').val();
 
     var typeIndex = outcome.length;
+    // increament the total characters
+    tch.totalChars++;
 
     // for any print-affecting character prevent default action
     var keys = [8,9,13,32,35,36,37,39,46,188,190,191,192,219,220,221,222,186,59,187,61,189,173];
@@ -86,14 +97,16 @@ function evaluateInput(e){
         if( typeIndex < source.length ){
             if(e.key !== source[typeIndex]){
                 outcome += '*';
+                tch.errors++;
             }else{
                 outcome += e.key;
             }
         }else if(typeIndex === source.length){
             if( e.key !== 'Enter'){
                 outcome += '*';
+                tch.errors++;
             }
-            // if this is the last input then at the end of the last enter disable any further input
+            // if this is the last input then disable any further input and update the accuracy
             if(!$(this).next().length){
                 $(".outcome").each(function(){
                     $(this).prop('disabled', true);
@@ -104,5 +117,8 @@ function evaluateInput(e){
         }
         $(this).find('.outcome').val(outcome);
     }
+
+    // finally update the accuracy for this keystroke
+    tch.updateAccuracy();
 }
 
