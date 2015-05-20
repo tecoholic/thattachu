@@ -8,6 +8,7 @@
     <link rel='stylesheet' href='bower_components/bootstrap/dist/css/bootstrap.css'>
     <link rel='stylesheet' href='bower_components/bootstrap/dist/css/bootstrap-theme.css'>
     <link rel='stylesheet' href='css/style.css'>
+    <link rel='stylesheet' href='bower_components/jquery.ime/css/jquery.ime.css'>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -90,7 +91,7 @@
         </div>
     </div>
 </div>
-<div id="statusbar" class="subhead col-sm-12 col-md-12">
+<div id="statusbar" class="col-sm-12 col-md-3 col-md-offset-9">
     <p>
         <span class="statitem">Errors: 0</span><span class="statitem"> Accuracy: 100%</span>
     </p>
@@ -98,6 +99,12 @@
 <!--Loading the scripts at the last can be painful for initialization move it to header if required -->
     <script src='bower_components/jquery/dist/jquery.min.js' type='text/javascript'></script>
     <script src='bower_components/bootstrap/dist/js/bootstrap.min.js' type='text/javascript'></script>
-    <script src='js/app.js' type="text/javascript"></script>
+<!-- jquery.ime files -->
+    <script src='bower_components/jquery.ime/src/jquery.ime.js' type='text/javascript'></script>
+    <script src='bower_components/jquery.ime/src/jquery.ime.preferences.js' type='text/javascript'></script>
+    <script src='bower_components/jquery.ime/src/jquery.ime.selector.js' type='text/javascript'></script>
+    <script src='bower_components/jquery.ime/src/jquery.ime.inputmethods.js' type='text/javascript'></script>
+<!-- application script which depends on all the above -->
+    <script src="js/app.js" type='text/javascript'></script>
 </body>
 </html>

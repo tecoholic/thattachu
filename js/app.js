@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+    console.log('document is ready');
     // Show the course selection modal
     $('#myModal').modal({show: true, backdrop: 'static', keyboard: false});
 
@@ -25,8 +26,11 @@ tch.loadLesson = function(lname){
             var lines = l[i].lines;
             $('#workbench').empty();
             for( var i=0; i<lines.length; i++){
-                $('#workbench').append('<p class="line">'+lines[i]+'</p><input type="text" class="typespace" />');
+                $('#workbench').append('<div class="line"><p class="source">'+lines[i]+'</p><input type="text" class="outcome" /></div>');
             }
+            // setup the input methods for all the inputs
+            $('.outcome').ime();
+            $(".line").bind('keydown',evaluateInput);
             return;
         }
     }
@@ -60,3 +64,39 @@ $('#courseSelect').on('change', function(){
         tch.loadLesson(course.lessons[0].name);
     });
 });
+
+function evaluateInput(e){
+    var source = $(this).find('.source').text();
+    var outcome = $(this).find('.outcome').val();
+
+    var typeIndex = outcome.length;
+
+    // for any print-affecting character prevent default action
+    var keys = [8,9,13,32,35,36,37,39,46,188,190,191,192,219,220,221,222,186,59,187,61,189,173];
+    console.log("pressed "+e.keyCode+" with keys.indexOf "+keys.indexOf(e.keyCode));
+    if( keys.indexOf(e.keyCode) != -1 || (e.keyCode >=48 && e.keyCode <= 57) || (e.keyCode >= 65 && e.keyCode <= 90)){
+        e.preventDefault();
+        // Now put the appropriate key in its place
+        if( typeIndex < source.length ){
+            if(e.key !== source[typeIndex]){
+                outcome += '*';
+            }else{
+                outcome += e.key;
+            }
+        }else if(typeIndex === source.length){
+            if( e.key !== 'Enter'){
+                outcome += '*';
+            }
+            // if this is the last input then at the end of the last enter disable any further input
+            if(!$(this).next().length){
+                $(".outcome").each(function(){
+                    $(this).prop('disabled', true);
+                });
+            }
+            // in case of further lines move the cursor to the next one
+            $(this).next().find('.outcome').focus();
+        }
+        $(this).find('.outcome').val(outcome);
+    }
+}
+

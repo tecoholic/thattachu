@@ -54,9 +54,11 @@ body {
 .work{
     padding-top: 20px;
 }
-
+#statusbar{
+    background: none repeat scroll 0% 0% #BDDCEB;
+    padding-top: 10px;
+}
 .statitem{
-    float: right;
     padding: 0px 20px;
 }
 
@@ -75,12 +77,12 @@ body {
     padding-top: 15px;
     font-size: 1.2em;
 }
-p.line{
+p.source{
     padding-top: 10px;
     font-size: 1.5em;
     font-family: Monospace;
 }
-input.typespace{
+input.outcome{
     width: 100%;
     border: 0;
     background-color: #adeade;
