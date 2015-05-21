@@ -29,8 +29,9 @@ casper.test.begin('Thattachu Entry modal loading', 13, function suite(test){
             test.assertNotVisible('#myModal', 'The entry form is closed');
         });
         casper.waitForResource('demo.json', function(){
-            test.assertEquals(casper.getHTML('#author'), 'Demo Author', "Course Author updated (hence meta)")
+            test.assertSelectorHasText('#coursedetails', 'Demo Author', "Course Author updated (hence meta)")
             test.assertElementCount('#sidebarList li a', 2, 'The sidebar list populated');
+            this.clickLabel("Index FJ", "a");
             test.assertEquals(casper.getHTML('#instructions'),
                 "Welcome to the first lesson in QWERTY Touch Typing. Keep your left index finger on <kbd>f</kbd> and your right index finger on <kbd>j</kbd>.",
                 "The first lesson instruction is loaded.");
