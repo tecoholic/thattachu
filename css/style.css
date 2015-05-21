@@ -68,6 +68,7 @@ body {
 #statusbar{
     bottom: 0px;
     position: fixed;
+    display: none;
 }
 #workbench{
     padding-bottom: 50px;
