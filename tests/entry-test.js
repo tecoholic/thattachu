@@ -1,4 +1,4 @@
-casper.test.begin('Thattachu Entry modal loading', 15, function suite(test){
+casper.test.begin('Thattachu Entry modal loading', 13, function suite(test){
 
     // open the page and make sure that it asks for language and course
     casper.start("http://0.0.0.0:8000/", function(){
@@ -8,14 +8,14 @@ casper.test.begin('Thattachu Entry modal loading', 15, function suite(test){
                 test.assertVisible('#myModal', 'The entry form is visible');
             });
         });
-        test.assertEquals(this.getFormValues('form#entryForm').language, 'none', "No language Selected");
-        test.assertEquals(this.getFormValues('form#entryForm').course, 'none', "No course selected");
     });
 
     // fill in the language and course
     casper.then(function(){
-        this.fill('form#entryForm', {'language' : 'en'});
-        test.assertEquals(this.getFormValues('form#entryForm').language, 'en', "Language is set to English");
+        casper.waitForResource('languages.json', function(){
+            this.fill('form#entryForm', {'language' : 'en'});
+            test.assertEquals(this.getFormValues('form#entryForm').language, 'en', "Language is set to English");
+        });
         casper.waitForResource('courselist.json', function(){
             this.fill('form#entryForm', {'course' : 'demo.json'});
             test.assertEquals(this.getFormValues('form#entryForm').course, 'demo.json', "Course is set to Demo");
@@ -29,8 +29,9 @@ casper.test.begin('Thattachu Entry modal loading', 15, function suite(test){
             test.assertNotVisible('#myModal', 'The entry form is closed');
         });
         casper.waitForResource('demo.json', function(){
-            test.assertEquals(casper.getHTML('#author'), 'Demo Author', "Course Author updated (hence meta)")
+            test.assertSelectorHasText('#coursedetails', 'Demo Author', "Course Author updated (hence meta)")
             test.assertElementCount('#sidebarList li a', 2, 'The sidebar list populated');
+            this.clickLabel("Index FJ", "a");
             test.assertEquals(casper.getHTML('#instructions'),
                 "Welcome to the first lesson in QWERTY Touch Typing. Keep your left index finger on <kbd>f</kbd> and your right index finger on <kbd>j</kbd>.",
                 "The first lesson instruction is loaded.");

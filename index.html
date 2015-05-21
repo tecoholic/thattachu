@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="thattachu">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,7 +17,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body ng-controller="IfaceControl">
 <!-- Modal dialog for course selection -->
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -31,16 +31,22 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label" for="lang">Language</label>
                 <div class="col-sm-9">
-                    <select id="lang" class="form-control" name="language">
+                    <select id="lang" class="form-control" name="language" ng-model='lang' ng-change='loadCourseList()'>
                         <option value="none">Select a language</option>
+                        <option ng-repeat="language in languages" value="{{language.code}}">
+                        {{language.name}}
+                        </option>
                     </select>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label" for="course">Course</label>
                 <div class="col-sm-9">
-                    <select id="courseSelect" class="form-control" name="course">
-                        <option value="none">Select a Course</option>
+                    <select id="courseSelect" class="form-control" name="course" ng-model='coursefile' ng-change='loadCourse()'>
+                        <option value="none">Select a course</option>
+                        <option ng-repeat="course in courses" value="{{course.file}}">
+                        {{course.name}}
+                        </option>
                     </select>
                 </div>
             </div>
@@ -74,18 +80,18 @@
             <div class="panel panel-info">
                 <div id="coursename" class="panel-heading">Course</div>
                 <div id="coursedetails" class="panel-body">
-                    <p><strong>Author: </strong><span id="author"></span></p>
-                    <p><strong>Level: </strong><span id="level"></span></p>
-                    <p><strong>Description: </strong><span id="description"></span></p>
-                    <p><strong>Language: </strong><span id="courselang"></span></p>
+                    <p><strong>Author: </strong>{{course.author}}</p>
+                    <p><strong>Level: </strong>{{course.level}}</p>
+                    <p><strong>Description: </strong>{{course.description}}</p>
+                    <p><strong>Language: </strong>{{course.language}}</p>
                 </div>
             </div>
             <div class="panel panel-info">
                 <div class="panel-heading">Lessons</div>
                 <ul id="sidebarList" class="list-group">
-                <li class='list-group-item'><a href="#">Lesson 1</a></li>
-                <li class='list-group-item'><a href="#">Lesson 2</a></li>
-                <li class='list-group-item'><a href="#">Lesson 3</a></li>
+                    <li class='list-group-item' ng-repeat="lesson in course.lessons">
+                        <a href="#" ng-click="loadLesson(lesson)">{{lesson.name}}</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -94,12 +100,16 @@
 <div id="workspace">
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <div class="subhead title col-sm-12">Instructions</div>
-        <div id="instructions" class="col-sm-12">
+        <div id="instructions" class="col-sm-12" ng-bind-html="instructions">
         </div>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <div class="subhead title col-sm-12"> Workspace </div>
         <div id="workbench" class="col-sm-12">
+            <div class="line" ng-repeat="line in lines">
+                <p class="source">{{line}}</p>
+                <input class="outcome" type="text">
+            </div>
         </div>
     </div>
 </div>
@@ -115,6 +125,8 @@
     <script src='bower_components/jquery.ime/src/jquery.ime.selector.js' type='text/javascript'></script>
     <script src='bower_components/jquery.ime/src/jquery.ime.inputmethods.js' type='text/javascript'></script>
 <!-- application script which depends on all the above -->
-    <script src="js/app.js" type='text/javascript'></script>
+    <script src="js/app_angular.js" type='text/javascript'></script>
+    <script src='bower_components/angular/angular.min.js' type="text/javascript"></script>
+    <script src="js/controller.js" type='text/javascript'></script>
 </body>
 </html>
