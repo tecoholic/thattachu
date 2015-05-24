@@ -1,6 +1,20 @@
-var thattachu = angular.module('thattachu', []);
+var IfaceControllers = angular.module('IfaceControllers', []);
 
-thattachu.controller('IfaceControl', function($scope, $http, $sce){
+IfaceControllers.service('courseData', function(){
+    var filename = '';
+    var lang='';
+    return {
+        getCourseFilename : function(){
+            return { "filename" : filename, "lang" : lang};
+        },
+        setCourseFilename : function(la, name){
+            filename = name;
+            lang = la;
+        }
+    };
+});
+
+IfaceControllers.controller('CourseControl',['$scope', '$http', '$sce', 'courseData', function($scope, $http, $sce, courseData){
 
     // check whether we have local storage and inform the user
     try{
@@ -22,19 +36,26 @@ thattachu.controller('IfaceControl', function($scope, $http, $sce){
         });
     };
 
-    $scope.loadCourse = function(){
-        $http.get('./data/'+$scope.lang+'/'+$scope.coursefile).success(function(data){
-            // Bootstrap/jQuery code
-            $("#myModal").modal('hide');
+    $scope.setCourse = function(){
+        // set the current course in both the localstorage and the service
+        // localStorage.set('selectedCourse', $scope.coursefile);
+        courseData.setCourseFilename($scope.lang, $scope.coursefile);
+    };
+
+}]);
+
+IfaceControllers.controller('WorkbenchControl', ['$scope', '$http', '$sce', 'courseData', function($scope, $http, $sce, courseData){
+    // get the course
+    cData = courseData.getCourseFilename();
+    $http.get('./data/'+cData.lang+'/'+cData.filename).success(function(data){
             $scope.course = data;
             // TODO check local storage for last completed course or lesson and update accordingly
             $scope.instructions = $sce.trustAsHtml(data.lessons[0].instructions);
             $scope.lines = data.lesson[0].lines;
-        });
-    };
-
+    });
+    // set the course parameters to match the view variables
     $scope.loadLesson = function(lesson){
         $scope.instructions = $sce.trustAsHtml(lesson.instructions);
         $scope.lines = lesson.lines;
     };
-});
+}]);

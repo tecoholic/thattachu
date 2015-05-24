@@ -16,52 +16,21 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <script src='bower_components/jquery/dist/jquery.min.js' type='text/javascript'></script>
+    <script src='bower_components/bootstrap/dist/js/bootstrap.min.js' type='text/javascript'></script>
+<!-- jquery.ime files -->
+    <script src='bower_components/jquery.ime/src/jquery.ime.js' type='text/javascript'></script>
+    <script src='bower_components/jquery.ime/src/jquery.ime.preferences.js' type='text/javascript'></script>
+    <script src='bower_components/jquery.ime/src/jquery.ime.selector.js' type='text/javascript'></script>
+    <script src='bower_components/jquery.ime/src/jquery.ime.inputmethods.js' type='text/javascript'></script>
+<!-- application script which depends on all the above -->
+    <script src='bower_components/angular/angular.min.js' type="text/javascript"></script>
+    <script src='bower_components/angular-route/angular-route.min.js' type="text/javascript"></script>
+    <script src="js/app_angular.js" type='text/javascript'></script>
+    <script src="js/controller.js" type='text/javascript'></script>
 </head>
-<body ng-controller="IfaceControl">
-<!-- Modal dialog for course selection -->
-
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Before you begin..</h4>
-      </div>
-      <div class="modal-body">
-          <div class="alert alert-danger" role="alert" ng-hide="!lstoreStatus">
-              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-              You are using a browser without local storage support. So Thattachu <strong>cannot</strong> store your course progress. Kindly select the course you wish to practise manually.
-          </div>
-        <form id='entryForm' class="form-horizontal">
-            <div class="form-group">
-                <label class="col-sm-3 control-label" for="lang">Language</label>
-                <div class="col-sm-9">
-                    <select id="lang" class="form-control" name="language" ng-model='lang' ng-change='loadCourseList()'>
-                        <option value="none">Select a language</option>
-                        <option ng-repeat="language in languages" value="{{language.code}}">
-                        {{language.name}}
-                        </option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label" for="course">Course</label>
-                <div class="col-sm-9">
-                    <select id="courseSelect" class="form-control" name="course" ng-model='coursefile' ng-change='loadCourse()'>
-                        <option value="none">Select a course</option>
-                        <option ng-repeat="course in courses" value="{{course.file}}">
-                        {{course.name}}
-                        </option>
-                    </select>
-                </div>
-            </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-      </div>
-    </div>
-  </div>
-</div>
-
+<body>
 <!-- Navigation and top bar  -->
 <nav class="navbar navbar-fixed-top navbar-inverse">
     <div class="container-fluid">
@@ -72,65 +41,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Thattachu</a>
+            <a class="navbar-brand" href="#/">Thattachu</a>
          </div>
     </div>
 </nav>
 
-<!-- Sidbar which loads the list of the lessons -->
-<div class="container-fluid">
-    <div class="row">
-        <div id="sidebar" class="col-sm-3 col-md-2 sidebar">
-            <div class="panel panel-info">
-                <div id="coursename" class="panel-heading">Course</div>
-                <div id="coursedetails" class="panel-body">
-                    <p><strong>Author: </strong>{{course.author}}</p>
-                    <p><strong>Level: </strong>{{course.level}}</p>
-                    <p><strong>Description: </strong>{{course.description}}</p>
-                    <p><strong>Language: </strong>{{course.language}}</p>
-                </div>
-            </div>
-            <div class="panel panel-info">
-                <div class="panel-heading">Lessons</div>
-                <ul id="sidebarList" class="list-group">
-                    <li class='list-group-item' ng-repeat="lesson in course.lessons">
-                        <a href="#" ng-click="loadLesson(lesson)">{{lesson.name}}</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="workspace">
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <div class="subhead title col-sm-12">Instructions</div>
-        <div id="instructions" class="col-sm-12" ng-bind-html="instructions">
-        </div>
-    </div>
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <div class="subhead title col-sm-12"> Workspace </div>
-        <div id="workbench" class="col-sm-12">
-            <div class="line" ng-repeat="line in lines">
-                <p class="source">{{line}}</p>
-                <input class="outcome" type="text">
-            </div>
-        </div>
-    </div>
-</div>
-<div id="statusbar" class="col-sm-12 col-md-3 col-md-offset-9">
-    <p>Errors: <span id="errors">0</span>    Accuracy: <span id="accuracy">0</span>%</p>
-</div>
-<!--Loading the scripts at the last can be painful for initialization move it to header if required -->
-    <script src='bower_components/jquery/dist/jquery.min.js' type='text/javascript'></script>
-    <script src='bower_components/bootstrap/dist/js/bootstrap.min.js' type='text/javascript'></script>
-<!-- jquery.ime files -->
-    <script src='bower_components/jquery.ime/src/jquery.ime.js' type='text/javascript'></script>
-    <script src='bower_components/jquery.ime/src/jquery.ime.preferences.js' type='text/javascript'></script>
-    <script src='bower_components/jquery.ime/src/jquery.ime.selector.js' type='text/javascript'></script>
-    <script src='bower_components/jquery.ime/src/jquery.ime.inputmethods.js' type='text/javascript'></script>
-<!-- application script which depends on all the above -->
-    <script src="js/app_angular.js" type='text/javascript'></script>
-    <script src='bower_components/angular/angular.min.js' type="text/javascript"></script>
-    <script src="js/controller.js" type='text/javascript'></script>
+<!-- Dynamic View space for templates  -->
+<div ng-view></div>
+
 </body>
 </html>

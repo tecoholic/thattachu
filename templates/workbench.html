@@ -1,0 +1,44 @@
+<!-- Sidbar which loads the list of the lessons -->
+<div class="container-fluid">
+    <div class="row">
+        <div id="sidebar" class="col-sm-3 col-md-2 sidebar">
+            <div class="panel panel-info">
+                <div id="coursename" class="panel-heading">Course</div>
+                <div id="coursedetails" class="panel-body">
+                    <p><strong>Author: </strong>{{course.author}}</p>
+                    <p><strong>Level: </strong>{{course.level}}</p>
+                    <p><strong>Description: </strong>{{course.description}}</p>
+                    <p><strong>Language: </strong>{{course.language}}</p>
+                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">Lessons</div>
+                <ul id="sidebarList" class="list-group">
+                    <li class='list-group-item' ng-repeat="lesson in course.lessons">
+                        <a href="#/workbench" ng-click="loadLesson(lesson)">{{lesson.name}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="workspace">
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="subhead title col-sm-12">Instructions</div>
+        <div id="instructions" class="col-sm-12" ng-bind-html="instructions">
+        </div>
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="subhead title col-sm-12"> Workspace </div>
+        <div id="workbench" class="col-sm-12">
+            <div class="line" ng-repeat="line in lines">
+                <p class="source">{{line}}</p>
+                <input class="outcome" type="text">
+            </div>
+        </div>
+    </div>
+</div>
+<div id="statusbar" class="col-sm-12 col-md-3 col-md-offset-9">
+    <p>Errors: <span id="errors">0</span>    Accuracy: <span id="accuracy">0</span>%</p>
+</div>
+
