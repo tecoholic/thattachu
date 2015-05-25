@@ -5,6 +5,7 @@
     "level": 0,
     "description" : "Beginner level QWERTY touch typing course",
     "language": "English",
+    "input" : "QWERTY",
     "lessons": [
     {
         "index" : 0,

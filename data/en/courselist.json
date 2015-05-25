@@ -5,6 +5,7 @@
     "author": "Demo Author",
     "level" : 0,
     "description" : "Beginner level QWERTY touch typing course",
-    "file" : "demo.json"
+    "file" : "demo.json",
+    "input" : "QWERTY"
 }
 ]
