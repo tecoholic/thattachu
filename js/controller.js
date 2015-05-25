@@ -47,13 +47,14 @@ IfaceControllers.controller('CourseControl',['$scope', '$http', '$sce', 'courseD
 IfaceControllers.controller('WorkbenchControl', ['$scope', '$http', '$sce', 'courseData', function($scope, $http, $sce, courseData){
     // get the course
     cData = courseData.getCourseFilename();
-    $http.get('./data/'+cData.lang+'/'+cData.filename).success(function(data){
-            $scope.course = data;
-            // TODO check local storage for last completed course or lesson and update accordingly
-            $scope.instructions = $sce.trustAsHtml(data.lessons[0].instructions);
-            $scope.lines = data.lesson[0].lines;
-    });
     // set the course parameters to match the view variables
+    $http.get('./data/'+cData.lang+'/'+cData.filename).success(function(data){
+        $scope.course = data;
+        // TODO check local storage for last completed course or lesson and update accordingly
+        $scope.instructions = $sce.trustAsHtml(data.lessons[0].instructions);
+        $scope.lines = data.lessons[0].lines;
+    });
+    // update the lesson when clicked
     $scope.loadLesson = function(lesson){
         $scope.instructions = $sce.trustAsHtml(lesson.instructions);
         $scope.lines = lesson.lines;
