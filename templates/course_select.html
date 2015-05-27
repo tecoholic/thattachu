@@ -18,7 +18,7 @@
         <div class="col-sm-6">
             <h3>Step 2: Input method</h3>
             <select id="inputmethod" class="form-control" name="inputmethod" ng-model="inmethod" ng-change="populateCourses()">
-                <option value="">Select a input method</option>
+                <option value="">Select an input method</option>
                 <option ng-repeat="method in methods" value="{{method.code}}">{{method.name}}</option>
             </select>
         </div>

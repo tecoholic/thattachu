@@ -43,7 +43,7 @@ IfaceControllers.controller('CourseControl',['$scope', '$http', '$sce', 'courseD
         inputsOfLang.forEach(function(ele, index, arr){
             $scope.methods.push({ "code" : ele, "name" : inputs[ele].name });
         });
-        $scope.method = "";
+        $scope.inmethod = "";//set default to "Select an input"
     };
 
     /*$http.get('./data/languages.json').success(function(data){
