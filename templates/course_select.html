@@ -1,33 +1,29 @@
 <div class="container">
-    <h2 class="modal-title" id="myModalLabel">Before you start typing...</h2>
-    <div class="alert alert-danger" role="alert" ng-hide="!lstoreStatus">
+    <div class="row alert alert-danger" role="alert" ng-hide="!lstoreStatus">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        You are using a browser without local storage support. So Thattachu <strong>cannot</strong> store your course progress. Kindly select the course you wish to practise manually.
+        You are using a browser without local storage support. So Thattachu <strong>cannot</strong> store your course progress. Manually select the course you wish to practise.
     </div>
-       <form id='entryForm' class="form-horizontal">
-            <div class="form-group">
-                <label class="col-sm-3 control-label" for="lang">Language</label>
-                <div class="col-sm-9">
-                    <select id="lang" class="form-control" name="language" ng-model='lang' ng-change='loadCourseList()'>
-                        <option value="none">Select a language</option>
-                        <option ng-repeat="language in languages" value="{{language.code}}">
-                        {{language.name}}
-                        </option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label" for="course">Course</label>
-                <div class="col-sm-9">
-                    <select id="courseSelect" class="form-control" name="course" ng-model='coursefile' ng-change="setCourse()">
-                        <option value="none">Select a course</option>
-                        <option ng-repeat="course in courses" value="{{course.file}}">
-                        {{course.name}}
-                        </option>
-                    </select>
-                </div>
-            </div>
-            <a class="btn btn-primary" href="#/workbench/">Begin Course</a>
-        </form>
+
+    <form>
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>Step 1: Language</h3>
+            <select id="lang" class="form-control" name="language" ng-model="lang" ng-change='populateInputMethods()'>
+                <option value="">Select a language</option>
+                <option ng-repeat="language in languages" value="{{language.code}}">
+                {{language.name}}
+                </option>
+            </select>
+        </div>
+        <div class="col-sm-6">
+            <h3>Step 2: Input method</h3>
+            <select id="inputmethod" class="form-control" name="inputmethod" ng-model="inmethod" ng-change="populateCourses()">
+                <option value="">Select a input method</option>
+                <option ng-repeat="method in methods" value="{{method.code}}">{{method.name}}</option>
+            </select>
+        </div>
+    </div>
+
+    </form>
 </div>
 

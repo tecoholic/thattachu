@@ -16,6 +16,10 @@ IfaceControllers.service('courseData', function(){
 
 IfaceControllers.controller('CourseControl',['$scope', '$http', '$sce', 'courseData', function($scope, $http, $sce, courseData){
 
+    if(!$.ime){
+        console.error("Error:IME is not available");
+        // TODO improve UX here
+    }
     // check whether we have local storage and inform the user
     try{
         if(localStorage in window && window['localStorage'] !== null)
@@ -24,7 +28,25 @@ IfaceControllers.controller('CourseControl',['$scope', '$http', '$sce', 'courseD
         $scope.lstoreStatus = false;
     }
 
-    $http.get('./data/languages.json').success(function(data){
+    var langObj = $.ime.languages;
+    var inputs = $.ime.sources;
+    var langIndex;
+    $scope.languages = [];
+    for(langIndex in langObj){
+        $scope.languages.push({ "code" : langIndex, "name" : langObj[langIndex].autonym });
+    }
+    $scope.lang = "";
+
+    $scope.populateInputMethods = function(){
+        $scope.methods = [];
+        var inputsOfLang = langObj[$scope.lang].inputmethods;
+        inputsOfLang.forEach(function(ele, index, arr){
+            $scope.methods.push({ "code" : ele, "name" : inputs[ele].name });
+        });
+        $scope.method = "";
+    };
+
+    /*$http.get('./data/languages.json').success(function(data){
         $scope.languages = data;
         $scope.lang = 'none';
     });
@@ -40,7 +62,7 @@ IfaceControllers.controller('CourseControl',['$scope', '$http', '$sce', 'courseD
         // set the current course in both the localstorage and the service
         // localStorage.set('selectedCourse', $scope.coursefile);
         courseData.setCourseFilename($scope.lang, $scope.coursefile);
-    };
+    };*/
 
 }]);
 
