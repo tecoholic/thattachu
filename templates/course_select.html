@@ -23,6 +23,25 @@
             </select>
         </div>
     </div>
+    <div class="row">
+        <h3>Step 3: Select Course</h3>
+        <table class="table table-hover table-bordered">
+            <tr>
+                <th>Id</th>
+                <th>Course Name and Description</th>
+                <th>Level</th>
+                <th>Author</th>
+                <th>No of lessons</th>
+            </tr>
+            <tr ng-repeat="course in courselist">
+                <td>{{course.id}}</td>
+                <td><a href="#/workbench" ng-click="setCourse(course)">{{course.name}}</a><br><small>{{course.description}}</small></td>
+                <td>{{course.level}}</td>
+                <td>{{course.author}}</td>
+                <td>{{course.lessoncount}}</td>
+            </tr>
+        </table>
+    </div>
 
     </form>
 </div>

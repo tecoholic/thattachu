@@ -46,23 +46,16 @@ IfaceControllers.controller('CourseControl',['$scope', '$http', '$sce', 'courseD
         $scope.inmethod = "";//set default to "Select an input"
     };
 
-    /*$http.get('./data/languages.json').success(function(data){
-        $scope.languages = data;
-        $scope.lang = 'none';
-    });
-
-    $scope.loadCourseList = function(){
+    $scope.populateCourses = function(){
         $http.get('./data/'+$scope.lang+'/courselist.json').success(function(data){
-            $scope.courses = data;
-            $scope.coursefile = 'none';
+            $scope.courselist = data;
         });
     };
 
-    $scope.setCourse = function(){
-        // set the current course in both the localstorage and the service
+    $scope.setCourse = function(course){
         // localStorage.set('selectedCourse', $scope.coursefile);
-        courseData.setCourseFilename($scope.lang, $scope.coursefile);
-    };*/
+        courseData.setCourseFilename($scope.lang, course.file);
+    }
 
 }]);
 

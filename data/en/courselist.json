@@ -3,9 +3,10 @@
     "id" : 0,
     "name" : "Demo Course",
     "author": "Demo Author",
-    "level" : 0,
+    "level" : "Beginner",
     "description" : "Beginner level QWERTY touch typing course",
     "file" : "demo.json",
-    "input" : "QWERTY"
+    "input" : "QWERTY",
+    "lessoncount" : 2
 }
 ]
