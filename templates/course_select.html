@@ -11,7 +11,7 @@
             <select id="lang" class="form-control" name="language" ng-model="lang" ng-change='populateInputMethods()'>
                 <option value="">Select a language</option>
                 <option ng-repeat="language in languages" value="{{language.code}}">
-                {{language.name}}
+                {{language.code}}-{{language.name}}
                 </option>
             </select>
         </div>
@@ -25,15 +25,30 @@
     </div>
     <div class="row">
         <h3>Step 3: Select Course</h3>
-        <table class="table table-hover table-bordered">
+        <table class="table table-striped table-bordered">
             <tr>
-                <th>Id</th>
-                <th>Course Name and Description</th>
-                <th>Level</th>
-                <th>Author</th>
-                <th>No of lessons</th>
+                <th ng-click="orderParam='id'; reverse=!reverse">Id
+                    <span class="pull-right glyphicon glyphicon-chevron-up" aria-hidden="true" ng-show="reverse && orderParam=='id'"></span>
+                    <span class="pull-right glyphicon glyphicon-chevron-down" aria-hidden="true" ng-show="!reverse && orderParam=='id'"></span>
+                </th>
+                <th ng-click="orderParam='name'; reverse=!reverse">Course Name and Description
+                    <span class="pull-right glyphicon glyphicon-chevron-up" aria-hidden="true" ng-show="reverse && orderParam=='name'"></span>
+                    <span class="pull-right glyphicon glyphicon-chevron-down" aria-hidden="true" ng-show="!reverse && orderParam=='name'"></span>
+                </th>
+                <th ng-click="orderParam='level'; reverse=!reverse">Level
+                    <span class="pull-right glyphicon glyphicon-chevron-up" aria-hidden="true" ng-show="reverse && orderParam=='level'"></span>
+                    <span class="pull-right glyphicon glyphicon-chevron-down" aria-hidden="true" ng-show="!reverse && orderParam=='level'"></span>
+                </th>
+                <th ng-click="orderParam='author'; reverse=!reverse">Author
+                    <span class="pull-right glyphicon glyphicon-chevron-up" aria-hidden="true" ng-show="reverse && orderParam=='author'"></span>
+                    <span class="pull-right glyphicon glyphicon-chevron-down" aria-hidden="true" ng-show="!reverse && orderParam=='author'"></span>
+                </th>
+                <th ng-click="orderParam='lessoncount'; reverse=!reverse">No of lessons
+                    <span class="pull-right glyphicon glyphicon-chevron-up" aria-hidden="true" ng-show="reverse && orderParam=='lessoncount'"></span>
+                    <span class="pull-right glyphicon glyphicon-chevron-down" aria-hidden="true" ng-show="!reverse && orderParam=='lessoncount'"></span>
+                </th>
             </tr>
-            <tr ng-repeat="course in courselist">
+            <tr ng-repeat="course in courselist | filter:inmethod | orderBy:orderParam:reverse">
                 <td>{{course.id}}</td>
                 <td><a href="#/workbench" ng-click="setCourse(course)">{{course.name}}</a><br><small>{{course.description}}</small></td>
                 <td>{{course.level}}</td>

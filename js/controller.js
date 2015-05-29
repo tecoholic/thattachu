@@ -28,6 +28,10 @@ IfaceControllers.controller('CourseControl',['$scope', '$http', '$sce', 'courseD
         $scope.lstoreStatus = false;
     }
 
+    // course table intial parameters
+    $scope.reverse = false;
+    $scope.orderParam = 'id';
+
     var langObj = $.ime.languages;
     var inputs = $.ime.sources;
     var langIndex;
@@ -49,6 +53,7 @@ IfaceControllers.controller('CourseControl',['$scope', '$http', '$sce', 'courseD
     $scope.populateCourses = function(){
         $http.get('./data/'+$scope.lang+'/courselist.json').success(function(data){
             $scope.courselist = data;
+            $scope.courseDataRecieved = true;
         });
     };
 

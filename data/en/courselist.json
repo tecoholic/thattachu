@@ -6,7 +6,9 @@
     "level" : "Beginner",
     "description" : "Beginner level QWERTY touch typing course",
     "file" : "demo.json",
-    "input" : "QWERTY",
+    "input" : "International Phonetic Alphabet - X-SAMPA|ipa-x-sampa",
     "lessoncount" : 2
-}
+},
+{"id":24,"name":"Test course for English SIL","author":"Test author","description":"International Phonetic Alphabet based course","level":"Intermediate","language":"en-English","input":"International Phonetic Alphabet - SIL|ipa-sil","lessoncount":1},
+{"id":25,"name":"Test course for English SIL-2","author":"Dummy Test author","description":"International Phonetic Alphabet based course","level":"Expert","language":"en-English","input":"International Phonetic Alphabet - SIL|ipa-sil","lessoncount":5}
 ]
