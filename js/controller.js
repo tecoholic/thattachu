@@ -8,6 +8,9 @@ IfaceControllers.service('courseData', function(){
             return { "filename" : filename, "lang" : lang};
         },
         setCourseFilename : function(la, name){
+            if(typeof la === 'undefined' || typeof name === 'undefined' || la.length === 0 || name.length === 0 ){
+                console.error("Insufficient course data sent.\n lang="+la+", filename="+name+"\n.Check your courselist.json");
+            }
             filename = name;
             lang = la;
         }
@@ -51,7 +54,7 @@ IfaceControllers.controller('CourseControl',['$scope', '$http', '$sce', 'courseD
     };
 
     $scope.populateCourses = function(){
-        $http.get('./data/'+$scope.lang+'/courselist.json').success(function(data){
+        $http.get('./data/'+$scope.lang+'/courselist.json?nocache='+(new Date()).getTime()).success(function(data){
             $scope.courselist = data;
             $scope.courseDataRecieved = true;
         });
@@ -67,8 +70,15 @@ IfaceControllers.controller('CourseControl',['$scope', '$http', '$sce', 'courseD
 IfaceControllers.controller('WorkbenchControl', ['$scope', '$http', '$sce', 'courseData', function($scope, $http, $sce, courseData){
     // get the course
     cData = courseData.getCourseFilename();
+
+    if(typeof cData.lang === 'undefined' || typeof cData.filename === 'undefined' || cData.lang.length === 0 ||  cData.filename.length === 0){
+        $scope.noCourseData = true;
+        return;
+    }
+    // if course data is available countinue as normal
+    $scope.noCourseData = false;
     // set the course parameters to match the view variables
-    $http.get('./data/'+cData.lang+'/'+cData.filename).success(function(data){
+    $http.get('./data/'+cData.lang+'/'+cData.filename+"?nocache="+(new Date()).getTime()).success(function(data){
         $scope.course = data;
         // TODO check local storage for last completed course or lesson and update accordingly
         $scope.instructions = $sce.trustAsHtml(data.lessons[0].instructions);

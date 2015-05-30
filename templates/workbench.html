@@ -24,6 +24,16 @@
 </div>
 <div id="workspace">
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <!-- Warning if there isn't any course data -->
+        <div id="nocourse" class="alert alert-danger" ng-show="noCourseData">
+           <h3>No Course Data Available</h3>
+           <p>
+               There is course data avilable to load into the workbench. Either you have come here without selecting a course
+               or the course data has been cleared from your computer.
+           </p>
+           <p><a class="btn btn-info pull-rigth" href="#/courses">Select a course now</a></p>
+        </div>
+        <!-- End Warning -->
         <div class="subhead title col-sm-12">Instructions</div>
         <div id="instructions" class="col-sm-12" ng-bind-html="instructions">
         </div>
