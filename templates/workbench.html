@@ -43,7 +43,7 @@
         <div id="workbench" class="col-sm-12">
             <div class="line" ng-repeat="line in lines">
                 <p class="source">{{line}}</p>
-                <input class="outcome" type="text">
+                <input class="outcome" type="text" ng-focus="bindIME($event)">
             </div>
         </div>
     </div>

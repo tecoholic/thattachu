@@ -89,4 +89,18 @@ IfaceControllers.controller('WorkbenchControl', ['$scope', '$http', '$sce', 'cou
         $scope.instructions = $sce.trustAsHtml(lesson.instructions);
         $scope.lines = lesson.lines;
     };
+
+    $scope.bindIME = function( $event ){
+        var langId = $scope.course.language.split('-')[0];
+        var inputId  = $scope.course.input.split('|')[1];
+
+        $.ime.defaults.imePath = './bower_components/jquery.ime/';
+        $($event.target).ime({languages: [langId]});
+        var imeObject = $($event.target).data('ime');
+        imeObject.setLanguage(langId);
+        imeObject.load( inputId ).done(function(){
+            imeObject.setIM(inputId);
+            imeObject.enable();
+        });
+    };
 }]);
