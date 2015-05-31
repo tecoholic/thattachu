@@ -5,7 +5,7 @@
     "level": 0,
     "description" : "Beginner level QWERTY touch typing course",
     "language": "English",
-    "input" : "QWERTY",
+    "input" : "International Phonetic Alphabet - X-SAMPA|ipa-x-sampa",
     "lessons": [
     {
         "index" : 0,

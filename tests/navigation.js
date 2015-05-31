@@ -1,8 +1,8 @@
-casper.test.begin('Navigation Test', 11, function suite(test){
+casper.test.begin('Navigation Test', 13, function suite(test){
 
-    casper.start('http://0.0.0.0:8000', function(){
+    casper.start('http://localhost/thattachu', function(){
         test.assertTitle('Thattachu', "Thattachu page loaded");
-        test.assertEquals(casper.getElementAttribute("a.btn", "href"), "#/courses/", "Button to navigate to courses is present" );
+        test.assertEquals(casper.getElementAttribute("a.btn", "href"), "#/courses", "Button to navigate to courses is present" );
         this.click("a.btn");
         console.log("Clicked the button. Navigating to the course selection page");
     });
@@ -10,17 +10,20 @@ casper.test.begin('Navigation Test', 11, function suite(test){
     casper.then(function(){
         test.assertExists("form#entryForm", "The course selection form is found");
         test.assertExists("select#lang", "The language selector is present");
-        test.assertExists("select#courseSelect", "The course selector is present");
-        test.assertEquals(casper.getElementAttribute("a.btn", "href"), "#/workbench/", "Button to navigate to workbench is present" );
-        casper.waitForResource('languages.json', function(){
-            this.fill('form#entryForm', {'language' : 'en'});
-            test.assertEquals(this.getFormValues('form#entryForm').language, 'en', "Language is set to English");
-        });
+        test.assertExists("select#inputmethod", "The input method selector is present");
+        test.assertExists("table#courselist", "The course selector is present");
+        this.fill('form#entryForm', {'language' : 'en'});
+        test.assertEquals(this.getFormValues('form#entryForm').language, 'en', "Choosing language English");
+        this.fill('form#entryForm', {'inputmethod' : 'ipa-x-sampa'});
+        test.assertEquals(this.getFormValues('form#entryForm').inputmethod, 'ipa-x-sampa', "Choosing input method X-SAMPA");
+
         casper.waitForResource('courselist.json', function(){
-            this.fill('form#entryForm', {'course' : 'demo.json'});
-            test.assertEquals(this.getFormValues('form#entryForm').course, 'demo.json', "Course is set to Demo");
-            this.click("a.btn");
-            console.log("Clicked the workbench button. Navigating to the workbench.");
+            console.log("Recieved course list");
+            var courses = this.evaluate(function(){ return document.querySelectorAll('a.ng-binding').length; });
+            test.assertEquals(courses, 1, "One course present");
+            test.assertEquals(this.getHTML('a.ng-binding'), "Demo Course", "Course name is 'Demo Course'");
+            this.clickLabel('Demo Course');
+            console.log("Clicked the Demo Lesson. Navigating to the work bench.");
         });
     });
 
