@@ -61,7 +61,7 @@ IfaceControllers.controller('CourseControl',['$scope', '$http', '$sce', 'courseD
     };
 
     $scope.setCourse = function(course){
-        // localStorage.set('selectedCourse', $scope.coursefile);
+        localStorage.setItem('currentCourse', $scope.lang+"|"+course.file);
         courseData.setCourseFilename($scope.lang, course.file);
     }
 
@@ -69,25 +69,62 @@ IfaceControllers.controller('CourseControl',['$scope', '$http', '$sce', 'courseD
 
 IfaceControllers.controller('WorkbenchControl', ['$scope', '$http', '$sce', 'courseData', function($scope, $http, $sce, courseData){
     // get the course
-    cData = courseData.getCourseFilename();
+    var cData = courseData.getCourseFilename();
+    var localCourse = localStorage.getItem( 'currentCourse' );
+    var localLesson = localStorage.getItem( 'currentLesson' );
 
-    if(typeof cData.lang === 'undefined' || typeof cData.filename === 'undefined' || cData.lang.length === 0 ||  cData.filename.length === 0){
-        $scope.noCourseData = true;
-        return;
+    // check are we getting data from CourseController
+    if(typeof cData.lang === 'undefined' ||
+        typeof cData.filename === 'undefined' ||
+        cData.lang.length === 0 ||
+        cData.filename.length === 0)
+    {
+        // check if we have any localstorage lessons
+        if( localCourse === null ||
+           localCourse.length === 0 ||
+           localLesson === null ||
+           localLesson.length === 0 )
+        { // if we don't show error and exit
+           $scope.noCourseData = true;
+           return;
+        }
+        else
+        { // if we have local data load it to cData
+           cData.lang = localCourse.split('|')[0];
+           cData.filename = localCourse.split('|')[1];
+           cData.lesson = localLesson;
+        }
+    }
+
+    // function to check local storage and return the current lesson
+    function getLesson( course ){
+        if( localCourse ){
+            if( localCourse.split("|")[1] === cData.filename ){
+                 for( var i=0; i<course.lessons.length; i++ ){
+                    if( course.lessons[i].name === localLesson ){
+                        $scope.currentLessonIndex = i;
+                        return course.lessons[i];
+                    }
+                 }
+            }
+        }
+        return course.lessons[0];
     }
     // if course data is available countinue as normal
     $scope.noCourseData = false;
+    $scope.currentLessonIndex = 0;
     // set the course parameters to match the view variables
     $http.get('./data/'+cData.lang+'/'+cData.filename+"?nocache="+(new Date()).getTime()).success(function(data){
         $scope.course = data;
-        // TODO check local storage for last completed course or lesson and update accordingly
-        $scope.instructions = $sce.trustAsHtml(data.lessons[0].instructions);
-        $scope.lines = data.lessons[0].lines;
+        $scope.loadLesson( getLesson(data) );
+
     });
     // update the lesson when clicked
     $scope.loadLesson = function(lesson){
         $scope.instructions = $sce.trustAsHtml(lesson.instructions);
         $scope.lines = lesson.lines;
+        $scope.currentLessonIndex = lesson.index;
+        localStorage.setItem('currentLesson', lesson.name );
     };
 
     $scope.bindIME = function( $event ){

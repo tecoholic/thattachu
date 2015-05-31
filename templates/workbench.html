@@ -14,7 +14,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading">Lessons</div>
                 <ul id="sidebarList" class="list-group">
-                    <li class='list-group-item' ng-repeat="lesson in course.lessons">
+                    <li class='list-group-item' ng-repeat="lesson in course.lessons" ng-class="(lesson.index==currentLessonIndex) ? 'list-group-item-warning' : ''">
                         <a href="#/workbench" ng-click="loadLesson(lesson)">{{lesson.name}}</a>
                     </li>
                 </ul>
