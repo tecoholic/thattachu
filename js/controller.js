@@ -1,6 +1,6 @@
 var IfaceControllers = angular.module('IfaceControllers', []);
 
-IfaceControllers.service('courseData', function(){
+IfaceControllers.factory('courseData', function(){
     var filename = '';
     var lang='';
     return {
