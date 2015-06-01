@@ -22,9 +22,11 @@
     "jquery.ime": "https://github.com/tecoholic/jquery.ime.git#e786f74fac19f07ef2e0cfc2d4df4e711a7bd160"
   },
   "devDependencies": {
-    "qunit": "~1.18.0"
+    "qunit": "~1.18.0",
+    "angular-mocks": "~1.4.0"
   },
   "resolutions": {
-    "jquery.ime": "e786f74fac19f07ef2e0cfc2d4df4e711a7bd160"
+    "jquery.ime": "e786f74fac19f07ef2e0cfc2d4df4e711a7bd160",
+    "angular": "1.4.0"
   }
 }
