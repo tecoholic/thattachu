@@ -34,6 +34,7 @@ IfaceControllers.controller('CourseControl',['$scope', '$http', '$sce', 'courseD
     // course table intial parameters
     $scope.reverse = false;
     $scope.orderParam = 'id';
+    $scope.courseReqMade = false;
 
     var langObj = $.ime.languages;
     var inputs = $.ime.sources;
@@ -54,6 +55,7 @@ IfaceControllers.controller('CourseControl',['$scope', '$http', '$sce', 'courseD
     };
 
     $scope.populateCourses = function(){
+        $scope.courseReqMade = true;
         $http.get('./data/'+$scope.lang+'/courselist.json?nocache='+(new Date()).getTime()).success(function(data){
             $scope.courselist = data;
             $scope.courseDataRecieved = true;

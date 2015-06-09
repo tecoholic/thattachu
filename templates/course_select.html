@@ -48,7 +48,7 @@
                     <span class="pull-right glyphicon glyphicon-chevron-down" aria-hidden="true" ng-show="!reverse && orderParam=='lessoncount'"></span>
                 </th>
             </tr>
-            <tr ng-repeat="course in courselist | filter:inmethod | orderBy:orderParam:reverse">
+            <tr ng-repeat="course in courses =(courselist | filter:inmethod | orderBy:orderParam:reverse)">
                 <td>{{course.id}}</td>
                 <td><a href="#/workbench" ng-click="setCourse(course)">{{course.name}}</a><br><small>{{course.description}}</small></td>
                 <td>{{course.level}}</td>
@@ -56,6 +56,13 @@
                 <td>{{course.lessoncount}}</td>
             </tr>
         </table>
+    </div>
+    <div class="row alert alert-danger" ng-show="!courses.length && courseReqMade">
+        <div class="col-12" role="alert">
+            <p><strong>Cannot find a course?</strong></p>
+            <p><a href="http://www.srik.me/asiriyar/">Thattachu Asiriyar</a> is a tool that lets people create course files for Thattachu typing tutor. Use the tool and create a course for your language and input or forward the link to someone who can create a course.</p>
+            <a class="btn btn-success pull-right" href="http://www.srik.me/asiriyar/">Create Course</a>
+        </div>
     </div>
 
     </form>
