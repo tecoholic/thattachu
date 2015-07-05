@@ -25,7 +25,7 @@ IfaceControllers.controller('CourseControl',['$scope', '$http', '$sce', 'courseD
     }
     // check whether we have local storage and inform the user
     try{
-        if(localStorage in window && window['localStorage'] !== null)
+        if(localStorage in window && window.localStorage !== null)
             $scope.lstoreStatus = true;
     }catch(e){
         $scope.lstoreStatus = false;
@@ -65,7 +65,7 @@ IfaceControllers.controller('CourseControl',['$scope', '$http', '$sce', 'courseD
     $scope.setCourse = function(course){
         localStorage.setItem('currentCourse', $scope.lang+"|"+course.file);
         courseData.setCourseFilename($scope.lang, course.file);
-    }
+    };
 
 }]);
 
