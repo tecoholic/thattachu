@@ -55,7 +55,7 @@ router.post('/compile', urlEncodedParser, function(req, res){
 
     Course.saveCourse(course, function(msg){
         res.set({"Content-Type": "text/plain"});
-        res.send(course);
+        res.send(msg);
     });
 
 
