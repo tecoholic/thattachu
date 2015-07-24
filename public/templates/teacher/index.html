@@ -76,9 +76,9 @@
                 <label class="col-sm-2 control-label" for="level">Level</label>
                 <div class="col-sm-10">
                     <select id="level" class="form-control" name="level" ng-model="course.level">
-                        <option value="Beginner">Beginner</option>
-                        <option value="Intermediate">Intermediate</option>
-                        <option value="Expert">Expert</option>
+                        <option value="0">Beginner</option>
+                        <option value="1">Intermediate</option>
+                        <option value="2">Expert</option>
                     </select>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                 <a ng-click="addLesson()" class="btn"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Lesson</a>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-success btn-lg pull-right">Create JSON File</button>
+                <button type="submit" class="btn btn-success btn-lg pull-right">Add new course</button>
             </div>
         </form>
     </div>

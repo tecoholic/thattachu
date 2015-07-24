@@ -21,14 +21,12 @@ router.post('/compile', urlEncodedParser, function(req, res){
 
     // rebuild the form data into a course json
     var course = {};
-    course.id = Math.floor(Math.random()*100);
     course.name = req.body.name;
     course.author = req.body.author;
     course.description = req.body.description;
     course.level = req.body.level;
     course.language = req.body.language;
     course.input = req.body.inputmethod;
-    course.lessoncount = 0;
     course.lessons = [];
 
     var lesson = function(id, name, ins, lines){
@@ -54,11 +52,12 @@ router.post('/compile', urlEncodedParser, function(req, res){
         var l2 = lesson(0, req.body.lessonName, req.body.instructions, req.body.lines );
         course.lessons.push(l2);
     }
-    // finally update the lesson count
-    course.lessoncount = course.lessons.length;
 
-    res.set({"Content-Disposition":"attachment; filename=course.json", "Content-Type": "application/json"});
-    res.send(course);
+    Course.saveCourse(course, function(msg){
+        res.set({"Content-Type": "text/plain"});
+        res.send(course);
+    });
+
 
 });
 
