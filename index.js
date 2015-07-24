@@ -1,4 +1,5 @@
-var express = require('express');
+var express = require('express'),
+    db = require('./models/db');
 var app = express();
 
 // Set up static folder

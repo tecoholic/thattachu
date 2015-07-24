@@ -15,3 +15,6 @@ var courseSchema = new Schema({
         instructions: String
     }]
 });
+
+mongoose.model('Course', courseSchema);
+mongoose.connect('mongodb://localhost/thattachu');

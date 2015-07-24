@@ -3,7 +3,7 @@
  * data and handles all the teacher routes
  */
 
-var models = require('./models');  // all the projects models
+var Course = require('../models/course');  // all the projects models
 
 var express = require('express');
 var router = express.Router();
