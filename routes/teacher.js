@@ -13,7 +13,7 @@ var jsonParser = bodyParser.json();
 var urlEncodedParser = bodyParser.urlencoded({extended: false});
 
 router.get('/', function(req, res){
-    res.redirect('/templates/teacher/index.html');
+    res.render('teacher');
 });
 
 router.post('/compile', urlEncodedParser, function(req, res){

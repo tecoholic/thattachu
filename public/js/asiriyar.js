@@ -1,6 +1,4 @@
-var asiriyar = angular.module('asiriyar',[]);
-
-asiriyar.controller('FormController', ['$scope', function($scope){
+thattachu.controller('FormController', ['$scope', function($scope){
 
     var languages = $.ime.languages;
     var langCode;
@@ -39,7 +37,7 @@ asiriyar.controller('FormController', ['$scope', function($scope){
     $scope.addLesson = function(){
         // add a new lesson
         lessonIndex++;
-        var newLesson = new lesson;
+        var newLesson = new lesson();
         newLesson.index = lessonIndex;
         $scope.course.lessons.push( newLesson );
     };
@@ -50,12 +48,10 @@ asiriyar.controller('FormController', ['$scope', function($scope){
     $scope.removeLesson = function(index){
         for(var i=0; i<$scope.course.lessons.length; i++){
             if($scope.course.lessons[i].index === index){
-                var removed = $scope.course.lessons.splice(i,1);
-                if(removed.length)
-                    delete removed;
+                $scope.course.lessons.splice(i,1);
             }
         }
-    }
+    };
 
     $scope.setIME = function(){
          // also load the IME dom with only selected language
@@ -70,7 +66,7 @@ asiriyar.controller('FormController', ['$scope', function($scope){
                 imeObj.enable();
             });
         });
-    }
+    };
 
 }]);
 

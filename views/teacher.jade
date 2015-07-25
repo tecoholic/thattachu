@@ -1,0 +1,57 @@
+extends ./layout.jade
+block content
+  div(ng-controller="FormController")
+    form(method="post", action="/teacher/compile", class="form-horizontal")
+      .form-group
+        label.col-sm-2.control-label(for="language") Language
+        .col-sm-10
+          select#language.form-control(name="language", ng-model="course.language", ng-change="populateInputs()", required)
+            option(value="") Select a language
+            option(ng-repeat="lang in languages", value="{{lang.code}}-{{lang.autonym}}") {{lang.code}}-{{lang.autonym}}
+      .form-group
+        label.col-sm-2.control-label(for="inputmethod") Input Method
+        .col-sm-10
+          select#inputmethod.form-control(name="inputmethod", ng-model="course.input", ng-change="setIME()", required)
+            option(value="") Select an input method
+            option(value="{{input.name}}|{{input.code}}",ng-repeat="input in inputs") {{input.name}}
+      .form-group
+        label.col-sm-2.control-label(for="name") Course Name
+        .col-sm-10
+          input.form-control(type="text", id="name", ng-model="course.name", required)
+      .form-group
+        label.col-sm-2.control-label(for="author") Author's Name
+        .col-sm-10
+          input.form-control(type="text", id="author", name="author", ng-model="course.author", required)
+      .form-group
+        label.col-sm-2.control-label(for="description") Short course description
+        .col-sm-10
+          input.form-control(type="text", id="description", name="description", ng-model="course.description", required)
+      .form-group
+        label.col-sm-2.control-label(for="level") Level
+        .col-sm-10
+          select#level.form-control(name="level", ng-model="course.level")
+            option(value="0") Beginner
+            option(value="1") Intermediate
+            option(value="2") Expert
+      .panel.panel-primary.form-group(ng-repeat="lesson in course.lessons", ng-form="lesson_{{$index}}")
+        .panel-heading Lesson {{lesson.index}}
+          span.close.glyphicon.glyphicon-minus-sign(aria-hidden="true", ng-click="removeLesson(lesson.index)", ng-show="course.lessons.length!=1", title="Remove lesson")
+        .panel-body
+          .form-group
+            label.col-sm-3.control-label(for="lesson{{lesson.index}}") Lesson Name
+            .col-sm-9
+              input(id="lesson{{lesson.index}}", class="form-control", type="text", name="lessonName", ng-model="lesson.name", ng-focus="setIME()", required)
+          .form-group
+            label.col-sm-3.control-label(for="instruct{{lesson.index}}") Instructions
+            .col-sm-9
+              textarea(id="instruct{{lesson.index}}", class="form-control", rows=3, name="instructions", ng-focus="setIME()", ng-model="lesson.instructions", required)
+          .form-group
+            label.col-sm-3.control-label(for="lines{{lesson.index}}") Lines for practice
+            .col-sm-9
+              textarea(id="lines{{lesson.index}}", class="form-control", rows=10, name="lines", ng-model="lesson.lines", ng-focus="setIME()", required)
+      .form-group
+        a(ng-click="addLesson()", class="btn")
+          span.glyphicon.glyphicon-plus-sign(aria-hidden="true") Add Lesson
+
+      .form-group
+        button(type="submit", class="btn btn-success btn-lg pull-right") Add new course
