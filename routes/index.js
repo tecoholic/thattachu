@@ -10,5 +10,8 @@ router.get('/courses', function(req, res){
     res.render('courses');
 });
 
+router.get('/workbench', function(req, res){
+    res.render('workbench');
+});
 
 module.exports = router;

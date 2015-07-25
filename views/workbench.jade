@@ -1,0 +1,47 @@
+extends ./layout.jade
+block content
+  // Sidebar which loads the list of the lessons
+  .container-fluid(ng-controller="WorkbenchControl")
+    .row
+      #sidebar.col-sm-3.col-md-2.sidebar
+        .panel.panel-info
+          #coursename.panel-heading {{course.name}}
+          #coursedetails.panel-body
+            p
+              strong Author: 
+              | {{course.author}}
+            p
+              strong Level: 
+              | {{course.level}}
+            p
+              strong Description: 
+              | {{course.description}}
+            p
+              strong Language: 
+              | {{course.language}}
+        .panel.panel-info
+          .panel-heading Lessons
+          ul#sidebarList.list-group
+            li.list-group-item(ng-repeat="lesson in course.lessons", ng-class="(lesson.index==currentLessonIndex) ? 'list-group-item-warning' : ''")
+              a(href="#", ng-click="loadLesson(lesson)") {{lesson.name}}
+  
+    #workspace
+      .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+        // Warning if there isn't any course data
+        #nocourse.alert.alert-danger(ng-show="noCourseData")
+          h3 No Course Data Available
+          p
+            | There is course data avilable to load into the workbench. Either you have come here without selecting a course
+            |  or the course data has been cleared from your computer.
+          p
+            a.btn.btn-info.pull-rigth(href="/courses") Select a course now
+        // End Warning
+        .subhead.title.col-sm-12 Instructions
+        #instructions.col-sm-12(ng-bind-html="instructions")
+
+      .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+        .subhead.title.col-sm-12 Workspace
+        #workbench.col-sm-12
+          .line(ng-repeat="line in lines")
+            p.source {{line}}
+            input.outcome(type="text", ng-focus="bindIME($event)")

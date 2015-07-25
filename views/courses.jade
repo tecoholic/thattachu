@@ -39,7 +39,7 @@ block content
            tr(ng-repeat="course in courses =(courselist | filter:inmethod | orderBy:orderParam:reverse)")
              td {{course.id}}
              td
-               a(href="#/workbench" ng-click="setCourse(course)") {{course.name}}
+               a(href="/workbench?courseid={{course.id}}&lang={{course.language}}") {{course.name}}
                br
                small {{course.description}}
              td {{course.level}}

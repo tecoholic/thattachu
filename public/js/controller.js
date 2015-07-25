@@ -125,6 +125,7 @@ thattachu.controller('WorkbenchControl', ['$scope', '$http', '$sce', 'courseData
     $scope.loadLesson = function(lesson){
         $scope.instructions = $sce.trustAsHtml(lesson.instructions);
         $scope.lines = lesson.lines;
+        console.log(lesson.lines);
         $scope.currentLessonIndex = lesson.index;
         localStorage.setItem('currentLesson', lesson.name );
     };
