@@ -1,6 +1,6 @@
-var IfaceControllers = angular.module('IfaceControllers', []);
+var thattachu = angular.module('thattachu', []);
 
-IfaceControllers.factory('courseData', function(){
+thattachu.factory('courseData', function(){
     var filename = '';
     var lang='';
     return {
@@ -17,7 +17,7 @@ IfaceControllers.factory('courseData', function(){
     };
 });
 
-IfaceControllers.controller('CourseControl',['$scope', '$http', '$sce', 'courseData', function($scope, $http, $sce, courseData){
+thattachu.controller('CourseControl',['$scope', '$http', '$sce', 'courseData', function($scope, $http, $sce, courseData){
 
     if(!$.ime){
         console.error("Error:IME is not available");
@@ -69,7 +69,7 @@ IfaceControllers.controller('CourseControl',['$scope', '$http', '$sce', 'courseD
 
 }]);
 
-IfaceControllers.controller('WorkbenchControl', ['$scope', '$http', '$sce', 'courseData', function($scope, $http, $sce, courseData){
+thattachu.controller('WorkbenchControl', ['$scope', '$http', '$sce', 'courseData', function($scope, $http, $sce, courseData){
     // get the course
     var cData = courseData.getCourseFilename();
     var localCourse = localStorage.getItem( 'currentCourse' );

@@ -1,0 +1,38 @@
+extends ./layout.jade
+
+block content
+  .container
+    .jumbotron
+      h1 Thattachu
+      p Welcome to Thattachu. A simple typing tutor where you can learn typing in <em>multiple</em> keyboard layouts of <em>multiple</em> languages
+    .row
+      .col-sm-4
+        h3 Step 1
+        p
+          strong Choose Language
+          br
+          | Thattachu provides ability to learn typing for 62 languages supported by 
+          a(href="https://github.com/wikimedia/jquery.ime") jQuery IME .
+          | Choose the language you want to learn.
+      .col-sm-4
+        h3 Step 2
+        p
+          strong Choose Layout
+          br
+          | Usually there are multiple keyboard layouts and input methods for a language. Choose the layout you want to practice.
+      .col-sm-4
+        h3 Step 3
+        p
+          strong Choose Course
+          br
+          em If there are available courses
+          | for the language and the input type you selected, we list them. You choose, you learn at your pace.
+    .row
+      .col-sm-12
+        a(href="#/courses",class="btn btn-primary btn-lg pull-right") Begin typing
+    hr
+    p
+      small Created using AngularJS and Bootstrap by 
+      a(href="http://www.arunmozhi.in") Arunmozhi.
+      a(href="https://github.com/tecoholic/thattachu") OpenSource
+      | - MIT licensed.

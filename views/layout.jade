@@ -1,5 +1,5 @@
 doctype html
-html(lang='en', ng-app='thattachu')
+html(lang='en', ng-app="thattachu")
   head
     meta(charset="UTF-8")
     meta(http-equiv="X-UA-Compatible",content="IE=edge")
@@ -24,8 +24,6 @@ html(lang='en', ng-app='thattachu')
     script(src='jquery.ime/src/jquery.ime.inputmethods.js',type='text/javascript')
     // application script which depends on all,the above
     script(src='angular/angular.min.js',type="text/javascript")
-    script(src='angular-route/angular-route.min.js',type="text/javascript")
-    script(src="js/app.js",type='text/javascript')
     script(src="js/controller.js",type='text/javascript')
 
   body
@@ -37,20 +35,21 @@ html(lang='en', ng-app='thattachu')
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href="#/") Thattachu
+          a.navbar-brand(href="/") Thattachu
 
         // collapsible other links
         #collapsibleMenu.collapse.navbar-collapse
           ul.nav.navbar-nav
             li
-              a(href="#/courses") Courses
+              a(href="/courses") Courses
             li
-              a(href="#/workbench") Workbench
+              a(href="/workbench") Workbench
             li
-              a(href="#/teacher") Create Course
+              a(href="/teacher") Create Course
           ul.nav.navbar-nav.navbar-right
             li
               a(href="https://github.com/tecoholic/thattachu") Source
 
     div(ng-view)
+      block content
 

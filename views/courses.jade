@@ -1,0 +1,55 @@
+extends ./layout.jade
+block content
+  .container(ng-controller="CourseControl")
+    .row.alert.alert-danger(role="danger", ng-hide="!lstoreStatus")
+      span.glyphicon.glyphicon-exclamation-sign(aria-hidden="true")
+      | You are using a browser without local storage support. So Thattachu <strong>cannot</strong> store your course progress. Manually select the course you wish to practise.
+  
+    form#entryForm
+      .row
+        .col-sm-6
+          h3 Step 1: Language
+          select#lang.form-control(name="language", ng-model="lang", ng-change='populateInputMethods()')
+            option(value="") Select a language
+            option(ng-repeat="language in languages", value="{{language.code}}") {{language.code}}-{{language.name}}
+        .col-sm-6
+           h3 Step 2: Input method
+           select#inputmethod.form-control(name="inputmethod", ng-model="inmethod", ng-change="populateCourses()")
+             option(value="") Select an input method
+             option(ng-repeat="method in methods", value="{{method.code}}") {{method.name}}
+      .row
+        h3 Step 3: Select Course
+        table#courselist.table.table-striped.table-bordered
+          tr
+            th(ng-click="orderParam='id'; reverse=!reverse") Id
+              span.pull-right.glyphicon.glyphicon-chevron-up(aria-hidden="true", ng-show="reverse && orderParam=='id'")
+              span.pull-right.glyphicon.glyphicon-chevron-down(aria-hidden="true", ng-show="!reverse && orderParam=='id'")
+            th(ng-click="orderParam='name'; reverse=!reverse") Course Name and Description
+              span.pull-right.glyphicon.glyphicon-chevron-up(aria-hidden="true", ng-show="reverse && orderParam=='name'")
+              span.pull-right.glyphicon.glyphicon-chevron-down(aria-hidden="true", ng-show="!reverse && orderParam=='name'")
+            th(ng-click="orderParam='level'; reverse=!reverse") Level
+              span.pull-right.glyphicon.glyphicon-chevron-up(aria-hidden="true", ng-show="reverse && orderParam=='level'")
+              span.pull-right.glyphicon.glyphicon-chevron-down(aria-hidden="true", ng-show="!reverse && orderParam=='level'")
+            th(ng-click="orderParam='author'; reverse=!reverse") Author
+              span.pull-right.glyphicon.glyphicon-chevron-up(aria-hidden="true", ng-show="reverse && orderParam=='author'")
+              span.pull-right.glyphicon.glyphicon-chevron-down(aria-hidden="true", ng-show="!reverse && orderParam=='author'")
+            th(ng-click="orderParam='lessoncount'; reverse=!reverse") No of lessons
+              span.pull-right.glyphicon.glyphicon-chevron-up(aria-hidden="true", ng-show="reverse && orderParam=='lessoncount'")
+              span.pull-right.glyphicon.glyphicon-chevron-down(aria-hidden="true", ng-show="!reverse && orderParam=='lessoncount'")
+           tr(ng-repeat="course in courses =(courselist | filter:inmethod | orderBy:orderParam:reverse)")
+             td {{course.id}}
+             td
+               a(href="#/workbench" ng-click="setCourse(course)") {{course.name}}
+               br
+               small {{course.description}}
+             td {{course.level}}
+             td {{course.author}}
+             td {{course.lessoncount}}
+    .row.alert.alert-danger(ng-show="!courses.length && courseReqMade")
+      .col-12(role="alert")
+        p
+          strong Cannot find a course?
+        p
+          a(href="/teacher") Thattachu
+          |  has a tool that lets people create course files for Thattachu typing tutor. Use the tool and create a course for your language and input or forward the link to someone who can create a course.
+        a.btn.btn-success.pull-right(href="/teacher") Create Course
