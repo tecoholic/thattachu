@@ -10,6 +10,7 @@
     "body-parser": "^1.13.2",
     "bower": "^1.4.1",
     "express": "^4.13.0",
+    "jade": "^1.11.0",
     "mongoose": "^4.0.6"
   },
   "devDependencies": {
